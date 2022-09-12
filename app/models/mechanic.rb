@@ -11,4 +11,9 @@ class Mechanic < ApplicationRecord
     end
   end
 
+  def open_rides_sorted_by_thrill
+      rides = self.rides.where(open: TRUE)
+      rides.order(thrill_rating: :desc)
+  end
+
 end
