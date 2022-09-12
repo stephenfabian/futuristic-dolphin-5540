@@ -18,15 +18,18 @@ require 'rails_helper'
           mechanic1 = Mechanic.create!(name: "Steve", years_of_experience: 60)
           mechanic2 = Mechanic.create!(name: "Roger", years_of_experience: 64)
 
-          mechanic_rides1 = MechanicRides.create!(ride_id: @jaws.id, mechanic_id: mechanic1.id)
-          mechanic_rides2 = MechanicRides.create!(ride_id: @scrambler.id, mechanic_id: mechanic1.id)
+          mechanic_rides1 = MechanicRide.create!(ride_id: @jaws.id, mechanic_id: mechanic1.id)
+          mechanic_rides2 = MechanicRide.create!(ride_id: @scrambler.id, mechanic_id: mechanic1.id)
 
           visit "/mechanics"
-          expect(page).to have_content(“All Mechanics”)
-          expect(page).to have_content(“Roger”)
-          expect(page).to have_content(“Steve”)
+          expect(page).to have_content("All Mechanics")
+          expect(page).to have_content("Roger")
+          expect(page).to have_content("Steve")
           expect(page).to have_content(60)
           expect(page).to have_content(64)
+          expect(page).to have_content("Average Years of Experience Across All Mechanics")
+          save_and_open_page
+          expect(page).to have_content(62)
 
         end
       end
